@@ -10,9 +10,13 @@ def lary(agrv):
         except ValueError:
             print("Parameter Error")
         else:
-            inc = salary - baoxian(salary) - 3500
-            yinnashui(inc)
-            print(jobnu +':'+ '{:.2f}'.format(salary-yinnashui(inc))) 
+            if salary > 3500:
+                inc = salary - baoxian(salary) - 3500
+                yinnashui(inc)
+                print(jobnu +':'+ '{:.2f}'.format(salary-yinnashui(inc)-baoxian(salary)))
+            else:
+                inc = salary - baoxian(salary)
+                print(jobnu +':'+ '{:.2f}'.format(inc)) 
 
 def baoxian(gongzi):
     baoxianfei =  gongzi * (0.08+0.02+0.005+0.06)
@@ -34,10 +38,10 @@ def yinnashui(income):
     fourdeduct = 2755
     fivededuct = 5505
     sixdeduct = 13505
-    if 0 <= income <= 1500:
+    if 0 < income <= 1500:
         taxable = (income * level) - deduct
     elif income <= 0:
-        print ('0.00')
+        taxable = 0
     elif 1500 < income <= 4500:
         taxable = (income * onelevel) - onededuct
     elif 4500 < income <= 9000:
