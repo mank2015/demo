@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+import os
 class findpwd(object):
     def __init__(self, findpwdd):
         self._findpwdd = findpwdd
@@ -34,6 +35,7 @@ class Config(object):
 
 if __name__ == '__main__':
     pwdfile = findpwd(sys.argv[1:])
-    config = Config(findpwd.c_pwd)
-    print(config)
-    print(pwdfile.c_index())
+    m_pwd = os.path.join('/home/shiyanlou/demo/filetiaozhan',pwdfile.c_pwd())
+    config = Config(m_pwd)
+    print(config.fileread())
+    print(m_pwd)
