@@ -48,12 +48,30 @@ class UserData(object):
         self._userdatafile = userdatafile
     def salary(self):
         with open(self._userdatafile) as file:
-            for item in file:
+            self.userdata = dict(line.strip().split(',') for line in file if line)
+        return self.userdata
+    def calculator(self):
+        for k,value in self.salary().items():
+            try:
+            jobnu,salary = item.split(':')
+            salary = int(salary)
+        except ValueError:
+            print("Parameter Error")
+        else:
+            if salary > 3500:
+                inc = salary - baoxian(salary) - 3500
+                yinnashui(inc)
+                print(jobnu +':'+ '{:.2f}'.format(salary-yinnashui(inc)-baoxian(salary)))
+            else:
+                inc = salary - baoxian(salary)
+                print(jobnu +':'+ '{:.2f}'.format(inc)) 
                 
 
 if __name__ == '__main__':
     pwdfile = findpwd(sys.argv[1:])
-    m_pwd = os.path.join('/home/shiyanlou/demo/filetiaozhan',pwdfile.c_pwd())
-    config = Config(m_pwd)
-    print(config.get_config('ShiYe'))
+    m_pwd = os.path.join('/home/shiyanlou/demo/filetiaozhan',pwdfile.d_pwd())
+    #config = Config(m_pwd)
+    userdata = UserData(m_pwd)
+    userdata.calculator()
+    #print(config.get_config('ShiYe'))
 
