@@ -29,14 +29,31 @@ class Config(object):
         self._configfile = configfile
     def filepwd(self):
         return self._configfile
-    def get_config(self):
+    def get_config(self,key):
         with open(self.filepwd()) as file:
             self._config = dict(line.strip().split('=') for line in file if line)
-            print(self._config)
+            self._con = {}
+            for k,value in self._config.items():
+                k = k.strip()
+                value = value.strip()
+                #return k,value
+                self._con[k] = value
+        return self._con[key]
+                         
+            #print(self._con)
+
+class UserData(object):
+    def __init__(self, userdatafile):
+        self.userdata = {}
+        self._userdatafile = userdatafile
+    def salary(self):
+        with open(self._userdatafile) as file:
+            for item in file:
+                
 
 if __name__ == '__main__':
     pwdfile = findpwd(sys.argv[1:])
     m_pwd = os.path.join('/home/shiyanlou/demo/filetiaozhan',pwdfile.c_pwd())
     config = Config(m_pwd)
-    print(config.get_config())
-    print(m_pwd)
+    print(config.get_config('ShiYe'))
+
