@@ -12,10 +12,23 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 def index():
     path = '/home/shiyanlou/files'
     files = os.listdir(path)
+    title_list = []
     for file in files:
         if not os.path.isdir(file):
             #iter_r = iter(open(path+"/"+file))
             #for line in iter_r:
             with open(path+"/"+file) as f:
                 title_data =json.load(f)
-        return render_template('index.html', title_data=title_data)
+                title_list.append(title_data)
+    return render_template('index.html', title_list=title_list)
+
+@app.route('/files/<filename>')
+def file(filename):
+    path = '/home/shiyanlou/files'
+    files = os.listdir(path)
+    for file in files:
+        if filename in file:
+            print(filename)
+           # with open(path+"/"+filename+".json") as f:
+           # file_data = json.load(f)
+    
